@@ -1,0 +1,77 @@
+{
+  "version": 3,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 21
+  },
+  "configurePresets": [
+    {
+      "name": "default",
+      "displayName": "default (Debug)",
+      "generator": "Ninja",
+      "binaryDir": "${sourceParentDir}/$env{BUILD_DIR}",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_C_COMPILER": "clang",
+        "CMAKE_CXX_COMPILER": "clang++",
+        "BUILD_SHARED_LIBS": "On",
+        "LLVM_DIR": "$env{LLVM_BUILD_DIR}/lib/cmake/llvm",
+        "LLVM_USE_LINKER": "lld",
+        "LLVM_ENABLE_LIBCXX": "On",
+        "LLVM_ENABLE_RTTI": "On",
+        "LLVM_ENABLE_ASSERTIONS": "On"
+      },
+      "environment": {
+        "BUILD_DIR": "chocopy-llvm-build-debug",
+        "LLVM_BUILD_DIR": "${sourceParentDir}/llvm-build-debug"
+      }
+    },
+    {
+      "name": "Base-Debug",
+      "inherits": [
+        "default"
+      ],
+      "displayName": "Base-Debug"
+    },
+    {
+      "name": "Base-Release",
+      "inherits": [
+        "default"
+      ],
+      "displayName": "Base-Release",
+      "environment": {
+        "BUILD_DIR": "chocopy-llvm-build-release"
+      },
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+      }
+    },
+    {
+      "name": "Base-RelWithDebInfo",
+      "inherits": [
+        "default"
+      ],
+      "displayName": "Base-RelWithDebInfo",
+      "environment": {
+        "BUILD_DIR": "chocopy-llvm-build-release"
+      },
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "Base-Debug",
+      "configurePreset": "Base-Debug"
+    },
+    {
+      "name": "Base-Release",
+      "configurePreset": "Base-Release"
+    },
+    {
+      "name": "Base-RelWithDebInfo",
+      "configurePreset": "Base-RelWithDebInfo"
+    }
+  ]
+}

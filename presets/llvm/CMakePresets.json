@@ -1,0 +1,93 @@
+{
+    "version": 3,
+    "cmakeMinimumRequired": {
+        "major": 3,
+        "minor": 21
+    },
+    "configurePresets": [
+        {
+            "name": "Default",
+            "displayName": "Default",
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/../../llvm-build-debug",
+            "cacheVariables": {
+                "CMAKE_C_COMPILER": "clang",
+                "CMAKE_CXX_COMPILER": "clang++",
+                "CMAKE_INSTALL_PREFIX": "${sourceDir}/../../llvm-toolchain",
+                "BUILD_SHARED_LIBS": "On",
+                "LLVM_DEFAULT_TARGET_TRIPLE": "x86_64-unknown-linux-gnu",
+                "LLVM_ENABLE_LIBCXX": "On",
+                "LLVM_ENABLE_LIBEDIT": "Off",
+                "LLVM_USE_LINKER": "lld",
+                "LLVM_ENABLE_RTTI": "On",
+                "LLVM_BUILD_TESTS": "On",
+                "LLVM_ENABLE_DUMP": "On",
+                "LLVM_ENABLE_ASSERTIONS": "On",
+                "LLVM_ENABLE_RUNTIMES": "",
+                "LLVM_ENABLE_PROJECTS": "",
+                "LLVM_TARGETS_TO_BUILD": "X86"
+            }
+        },
+        {
+            "name": "Debug",
+            "inherits": [
+                "Default"
+            ],
+            "displayName": "Debug",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug"
+            }
+        },
+        {
+            "name": "Release",
+            "inherits": [
+                "Default"
+            ],
+            "displayName": "Release",
+            "binaryDir": "${sourceDir}/../../llvm-build-release",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release"
+            }
+        },
+        {
+            "name": "RelWithDebInfo",
+            "inherits": [
+                "Default"
+            ],
+            "displayName": "RelWithDebInfo",
+            "binaryDir": "${sourceDir}/../../llvm-build-relwithdebinfo",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "RelWithDebInfo"
+            }
+        },
+        {
+            "name": "clang",
+            "inherits": [
+                "RelWithDebInfo"
+            ],
+            "displayName": "RelWithDebInfo",
+            "binaryDir": "${sourceDir}/../../llvm-build-relwithdebinfo+clang",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "RelWithDebInfo"
+            }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "Debug",
+            "configurePreset": "Debug"
+        },
+        {
+            "name": "Release",
+            "configurePreset": "Release"
+        },
+        {
+            "name": "RelWithDebInfo",
+            "configurePreset": "RelWithDebInfo"
+        },
+        {
+            "name": "clang",
+            "configurePreset": "clang"
+        }
+    ]
+}
