@@ -42,6 +42,25 @@ private:
   VarDef *parseVarDef();
   Literal *parseLiteral();
 
+  // own
+  FuncDef *parseFuncDef();
+  std::pair<DeclList, StmtList> parseFuncBody();
+  ClassDef *parseClassDef();
+  DeclList parseClassBody();
+  std::pair<Identifier *, TypeAnnotation *> parseTypedVar();
+  GlobalDecl *parseGlobalDecl();
+  NonLocalDecl *parseNonLocalDecl();
+  StmtList parseBlockStmt();
+  Stmt *parseForStmt();
+  Stmt *parseWhileStmt();
+  Stmt *parseIfStmt();
+  Stmt *parseSimpleStmt();
+  Stmt *parseReturnStmt();
+  Expr *parseProjectionExpr();
+  Expr *parseLogicalAndIfExpr();
+  Expr *parseCExpr();
+  Literal *parseOnlyLiteral();
+
 private:
   DiagnosticsEngine &Diags;
   ASTContext &Context;
